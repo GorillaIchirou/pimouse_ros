@@ -7,8 +7,8 @@ from pimouse_ros.msg import MotorFreqs
 from geometry_msgs.msg import Twist
 
 class MotorTest(unittest.TestCase):
-    def file_check(dev,value,message):
-        with open("/self/" + dev,"r") as f:
+    def file_check(self,value,message):
+        with open("/dev/" + dev,"r") as f:
             self.assertEqual(f.readline(),str(value)+"\n",message)
 
     def test_node_exist(self):
@@ -18,8 +18,8 @@ class MotorTest(unittest.TestCase):
     def test_put_freq(self):
         pub = rospy.Publisher('/motor_raw', MotorFreqs)
         m = MotorFreqs()
-        m.left_hz = 123 
-        m.right_hz = 456 
+        m.left_hz = 123
+        m.right_hz = 456
         for i in range(10):
             pub.publish(m)
             time.sleep(0.1)
